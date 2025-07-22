@@ -1,69 +1,55 @@
-# React + TypeScript + Vite
+# Proyecto OpenAI API Fullstack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación fullstack que permite enviar texto desde un frontend en React a un backend en Node.js/Express, el cual utiliza la API de OpenAI para generar texto de respuesta.
 
-Currently, two official plugins are available:
+## Estructura del proyecto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `src/` — Código del frontend en React (Vite).
+- `api/` — Lógica de backend y servicios para OpenAI.
+- `server.js` — Servidor Express que expone la API.
 
-## Expanding the ESLint configuration
+## Instalación
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clona el repositorio y entra a la carpeta del proyecto.
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+3. Crea un archivo `.env` en la raíz con tu clave de OpenAI:
+   ```env
+   OPENAI_API_KEY=tu_clave_aqui
+   ```
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Uso
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Backend
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Inicia el servidor backend:
+```bash
+node server.js
 ```
+El backend escuchará en `http://localhost:3001`.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Frontend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+En otra terminal, inicia el frontend:
+```bash
+npm run dev
 ```
+El frontend estará en `http://localhost:5173` (por defecto).
+
+### Comunicación
+
+El frontend envía peticiones POST a `/api/generate` con el texto a procesar. El backend responde con el texto generado por OpenAI.
+
+## Notas
+
+- El proxy en `vite.config.ts` permite que el frontend acceda al backend sin problemas de CORS.
+- Puedes modificar el modelo o la lógica de generación en `api/openAI_Service.js`.
+
+## Despliegue
+
+Para producción, puedes desplegar el backend y frontend en servicios como Vercel, Netlify, o tu propio servidor.
+
+---
+Hecho con ❤️ usando React, Express y OpenAI.
