@@ -22,23 +22,16 @@ Este proyecto es una aplicación fullstack que permite enviar texto desde un fro
 
 ## Uso
 
-### Backend
+## Desarrollo
 
-Inicia el servidor backend:
-```bash
-node server.js
-```
-El backend escuchará en `http://localhost:3001`.
-
-### Frontend
-
-En otra terminal, inicia el frontend:
+Para desarrollo local, ejecuta:
 ```bash
 npm run dev
 ```
-El frontend estará en `http://localhost:5173` (por defecto).
+Esto levantará tanto el frontend (Vite) como el backend (Express) en paralelo usando `concurrently`.
 
-### Comunicación
+- El backend escuchará en `http://localhost:3001`.
+- El frontend estará en `http://localhost:5173` (por defecto).
 
 El frontend envía peticiones POST a `/api/generate` con el texto a procesar. El backend responde con el texto generado por OpenAI.
 
